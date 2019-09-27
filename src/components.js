@@ -1,8 +1,8 @@
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import ApodCard from "./apodCard";
 
-export function Apods(props) {
+export default function Apods(props) {
 
   const [apod, setApod] = useState([]);
 
@@ -10,7 +10,7 @@ export function Apods(props) {
 
     console.log("this effect is executed when the apod state var is updated.");
     axios
-      .get("https://ghibliapi.herokuapp.com/apod")
+      .get('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY')
       .then(result => {
         setApod(result.data);
       })
@@ -23,10 +23,13 @@ export function Apods(props) {
     <div>
       {apod.map(img => {
         return (
-          <MovieCard
+          <ApodCard
             title={img.title}
-            description={img.description}
-            key={img.id}
+            explanation={img.explanation}
+            date={img.date}
+            hdurl={img.hdurl}
+            url={img.url}
+            copyright={img.copyright}
           />
         );
       })}

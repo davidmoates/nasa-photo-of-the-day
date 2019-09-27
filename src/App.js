@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import "./App.css";
+import Apods from "./components";
 
 function App() {
 
@@ -12,8 +13,8 @@ function App() {
       console.log('Error:', error);
     });
   return (
-    <div className="App">
-
+    <div>
+      <Apods />
     </div>
   );
 }
