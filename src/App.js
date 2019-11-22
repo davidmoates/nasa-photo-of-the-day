@@ -1,28 +1,33 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import axios from 'axios';
-
 import "./App.css";
+import NasaComponent from './Component/NasaComponent';
+
+
+
 
 function App() {
 
 
-  axios
-    .get("https://api.nasa.gov/planetary/apod?api_key=iMZDV67iJVxqg1nh1BTK7GFS1S9GeeS9txAMgbxH") //had to {sudo yarn add axios} to get this to work
+  const [picData, setPicData] = useState([]);
+
+
+  useEffect(() => {
+    axios.get("https://api.nasa.gov/planetary/apod?api_key=6ASOBSZgzfJUdqvTIrUQVFIU0wWs63jQQWAxjPV1")
     .then(response => {
       console.log(response);
+      setPicData(response.data);
     })
     .catch(error => {
       console.log("Error:", error);
-    });
-
+    })
+  },[])
 
 
   return (
     <div className="App">
-      <p>
-        Read through the instructions in the README.md file to build your NASA
-        app! Have fun 🚀!
-      </p>
+      {console.log(picData)}
+      <NasaComponent cData = {picData}/>
     </div>
   );
 }
